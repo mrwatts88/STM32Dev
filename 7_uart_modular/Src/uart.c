@@ -1,20 +1,5 @@
 #include "stm32f4xx.h"
-#include <stdio.h>
-
-#define SYS_FREQ			(16000000)
-#define APB1_CLK			SYS_FREQ
-#define UART_BAUDRATE		115200
-
-void uart2_tx_init(void);
-static uint16_t compute_uart_BD(uint32_t, uint32_t);
-void uart2_write(int);
-
-int main(void) {
-	uart2_tx_init();
-	while (1) {
-		printf("Hello world\n\r");
-	}
-}
+#include "uart.h"
 
 int __io_putchar(int ch) {
 	uart2_write(ch);
@@ -28,6 +13,10 @@ void uart2_write(int ch) {
 
 	// write to transmit data register
 	USART2->DR = (ch & 0xFF);
+}
+
+uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t BaudRate) {
+	return (PeriphClk + BaudRate / 2U) / BaudRate;
 }
 
 void uart2_tx_init(void) {
@@ -50,8 +39,3 @@ void uart2_tx_init(void) {
 	// 4. enable USART module
 	USART2->CR1 |= USART_CR1_UE;
 }
-
-static uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t BaudRate) {
-	return (PeriphClk + BaudRate / 2U) / BaudRate;
-}
-

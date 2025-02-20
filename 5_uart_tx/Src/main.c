@@ -12,7 +12,7 @@ int main(void) {
 	uart2_tx_init();
 	while (1) {
 		// screen /dev/tty.usbmodem103 115200 to see data
-//		uart2_write('Y');
+		uart2_write('Y');
 	}
 }
 

@@ -160,7 +160,8 @@ int main(void) {
 	}
 }
 
-int __io_putchar(int ch) {
+
+int __io_putchar(int ch){
  80002c4:	b580      	push	{r7, lr}
  80002c6:	b082      	sub	sp, #8
  80002c8:	af00      	add	r7, sp, #0
@@ -184,14 +185,13 @@ void uart2_write(int ch) {
  80002e0:	af00      	add	r7, sp, #0
  80002e2:	6078      	str	r0, [r7, #4]
 	// make sure transmit data register is empty
-	while (!(USART2->SR & USART_SR_TXE))
+	while (!(USART2->SR & USART_SR_TXE));
  80002e4:	bf00      	nop
  80002e6:	4b08      	ldr	r3, [pc, #32]	@ (8000308 <uart2_write+0x2c>)
  80002e8:	681b      	ldr	r3, [r3, #0]
  80002ea:	f003 0380 	and.w	r3, r3, #128	@ 0x80
  80002ee:	2b00      	cmp	r3, #0
  80002f0:	d0f9      	beq.n	80002e6 <uart2_write+0xa>
-		;
 
 	// write to transmit data register
 	USART2->DR = (ch & 0xFF);
@@ -287,7 +287,7 @@ static uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t BaudRate) {
  8000388:	af00      	add	r7, sp, #0
  800038a:	6078      	str	r0, [r7, #4]
  800038c:	6039      	str	r1, [r7, #0]
-	return (PeriphClk + BaudRate / 2U) / BaudRate;
+	return (PeriphClk + BaudRate/2U)/BaudRate;
  800038e:	683b      	ldr	r3, [r7, #0]
  8000390:	085a      	lsrs	r2, r3, #1
  8000392:	687b      	ldr	r3, [r7, #4]
