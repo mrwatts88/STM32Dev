@@ -1,5 +1,5 @@
 
-3_gpio_bsrr.elf:     file format elf32-littlearm
+4_gpio_input.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
